@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="container">
+      <div class="container">
       <div class="row">
         <div class="title-card">
           <h1>card shopping</h1>
@@ -9,24 +9,17 @@
       </div>
     </div>
     <div class="container">
-     <ProduoctList></ProduoctList>
+     <produoct-list></produoct-list>
     </div>
   </div>
   
 </template>
 
 <script>
-import ProduoctList from "./components/ProduoctList.vue"
+import ProduoctList from "./ProduoctList.vue"
 export default {
-  components : {
-    ProduoctList
-  },
+  components : {ProduoctList},
   name: 'app',
-  data () {
-    return {
-     
-    }
-  }
 }
 </script>
 

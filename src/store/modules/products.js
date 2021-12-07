@@ -5,15 +5,14 @@ const state = {
     all : []
 };
 
-
 const getters = {
     allProducts : state => state.all
 };
 
 const actions = {
-    getAllProducts({ commit }){
+    getAllProducts({ commit }) {
         shop.getProducts(products =>{
-            commit('receiveProductc' , { products});
+            commit('receiveProduct' , { products });
         })
     }
 };
@@ -29,7 +28,6 @@ const mutations = {
         state.all.find(p => p.id === id).inventory--;
     }
 };
-
 
 export default {
     state,

@@ -39,7 +39,7 @@ const mutations ={
     checkoutSuccess(state){
         state.checkOutState = 'successfull';
     },
-    checkoutFailure(state){
+    checkoutFailure(state , { savedCartItems }) {
         state.added = savedCartItems;
         state.checkOutState = 'failed'
     }

@@ -1,37 +1,41 @@
 <template>
     <div class="card">
-        <h2>Card</h2>
-        <p v-show="!products.length"><i>please add some products to cart.</i></p>
-        <hr>
+        <h2>Your Cart</h2>
+        <p v-show="!products.length"><i>Please add some products to cart.</i></p>
         <ul>
             <li v-for="(p , index) in products" :key="index">
                 {{ p.title }} - ${{ p.price }} x {{ p.quantity }}
             </li>
         </ul>
-        <p>Total : ${{ total }}</p>
+        <p>Total: ${{ total }}</p>
         <p>
-            <button :disabled="!products.length">checkout</button>
+            <button :disabled="!products.length" @click="checkout(products)">Checkout</button>
         </p>
-        <p v-show="checkOutState">checkout {{ checkOutState }}</p>
+        <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
     </div>
 </template>
 <script>
     import { mapGetters } from 'vuex';
 
-        export default{
-            computed :{
-                ...mapGetters({
-                    products : 'cartProducts',
-                    checkOutState : 'checkOutState'
-                    
-                }),
-                total(){
-                    return this.products.reduce((total , p) =>{
-                        return total + p.price * p.quantity ;
-                    },0)
-                }
+    export default {
+        computed : {
+            ...mapGetters({
+                products : 'cartProducts',
+                checkoutStatus : 'checkoutStatus'
+            }),
+            total() {
+                return this.products.reduce((total ,p) => {
+                   return total + p.price * p.quantity;
+                },0)
+            },
+
+        },
+        methods : {
+            checkout(products) {
+                this.$store.dispatch('checkout' , products)
             }
         }
+    }
 </script>
 <style scoped>
     .card{

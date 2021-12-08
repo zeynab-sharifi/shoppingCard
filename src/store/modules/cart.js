@@ -4,7 +4,9 @@ const state = {
     added : [],
     checkOutState : null
 };
-
+const getters = {
+    checkOutState : state => state.checkOutState
+}
 
 const mutations ={
     addToCart(state , {id }){
@@ -23,5 +25,6 @@ const mutations ={
 
 export default{
     state,
+    getters,
     mutations
 }

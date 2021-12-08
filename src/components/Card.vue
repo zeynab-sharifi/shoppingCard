@@ -8,24 +8,30 @@
                 {{ p.title }} - ${{ p.price }} x {{ p.quantity }}
             </li>
         </ul>
-        <p>Total : $0.00</p>
+        <p>Total : ${{ total }}</p>
         <p>
-            <button>checkout</button>
+            <button :disabled="!products.length">checkout</button>
         </p>
-        <p>checkout successful</p>
+        <p v-show="checkOutState">checkout {{ checkOutState }}</p>
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+    import { mapGetters } from 'vuex';
 
-    export default{
-        computed :{
-            ...mapGetters({
-                products : 'cartProducts',
-                
-            })
+        export default{
+            computed :{
+                ...mapGetters({
+                    products : 'cartProducts',
+                    checkOutState : 'checkOutState'
+                    
+                }),
+                total(){
+                    return this.products.reduce((total , p) =>{
+                        return total + p.price * p.quantity ;
+                    },0)
+                }
+            }
         }
-    }
 </script>
 <style scoped>
     .card{
